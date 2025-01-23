@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.movie-card{
+  display: flex;
+  flex-direction: column;
+}
+
+.fav-btn-img {
+  height: 30px;
+}
