@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px;
+  margin: 0 auto; */
+  width: 100%;
+  padding: 0;
   text-align: center;
 }
 
@@ -41,11 +42,72 @@
   color: #888;
 }
 
+.movie-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+  justify-content: center;
+}
+
 .movie-card{
   display: flex;
   flex-direction: column;
+  width: 200px;
 }
 
 .fav-btn-img {
   height: 30px;
+  background: white;
+  border-radius: 50% 50% 100% 100%;
+  opacity: 0;
+}
+
+.movie-list .movie-card .movie-img{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.movie-list .movie-card .movie-img:hover .fav-btn-img{
+  opacity: 1;
+}
+
+.fav-btn-img:hover{
+  background: red;
+}
+
+.movie-list .movie-card .movie-img .movie-overlay{
+  position: absolute;
+  right: 1.2rem;
+}
+
+.movie-list .movie-card .movie-img .movie-overlay .fav-btn{
+  padding: 0;
+  background: transparent;
+  border: transparent;
+}
+
+.movie-list .movie-card .movie-poster{
+  height: 250px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+}
+
+.navbar .goto-links{
+    display: flex;
+    justify-content: space-evenly;
+    left: 0;
+    position: relative;
+    width: 20rem;
+}
+
+.search-movies {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    width: 40vw;
+    height: 6vh;
 }

@@ -1,21 +1,62 @@
-import MovieCard from "../components/MovieCard";
+// render the component and create a search 
+// functionality to search for the movies in realtime 
 
-function Home(){
-    const movies =[
-        {id:1 ,title:"john Wick", date:"2020"},
-        {id:2 ,title:"Terminator", date:"2021"},
-        {id:3 ,title:"The Matrix", date:"2022"},
-        {id:4 ,title:"El Pachino", date:"2023"},
-    ]
+import React,{ useState,useEffect } from 'react';
+import MovieCard from '../components/MovieCard';
+import { getMovies } from '../services/api';
+import axios from 'axios';
 
+function Home() {
+    const [movies, setMovies] = useState([]);
+    const [searchVal, setSearchVal] = useState("");
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [err, setErr] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect( () => {
+        const fetchMovies = async () => {
+            try {
+                const data = await getMovies();
+                setMovies(data);
+                setFilteredMovies(data);
+            } catch (err) {
+                setErr(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchMovies();
+    }, []);
+
+    const handleSearch = (e) => {
+        setSearchVal(e.target.value);
+    }
+
+    useEffect(() => {
+        setFilteredMovies(
+            movies.filter(movie => movie.title.toLowerCase().includes(searchVal.toLowerCase()))
+        );    
+    }, [searchVal]);
+    
     return (
-        <div className="Home">
-            <div className="movies-grid">
-                {movies.map((movie) => (
-                    <MovieCard movie={movie} key={movie.id}/>
-                ))}
-            </div>
-        </div>
+      <>
+        <input
+          type="text"
+          className="search-movies"
+          placeholder="Search for movies..."
+          onChange={handleSearch}
+          value={searchVal}
+            />
+            {err && <div className='display-error'>{err}</div>}
+            {
+                loading ? <div className='loading'>Loading...</div> :
+                <div className="movie-list">
+                    {filteredMovies.map((movie) => (
+                        <MovieCard movie={movie} key={movie.id} />
+                    ))}
+                </div>
+            }
+      </>
     );
 }
 
