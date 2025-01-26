@@ -62,6 +62,10 @@
   opacity: 0;
 }
 
+.active {
+  background-color: red;
+}
+
 .movie-list .movie-card .movie-img{
     position: relative;
     display: flex;

@@ -29,7 +29,7 @@ function Home() {
     }, []);
 
     const handleSearch = (e) => {
-        setSearchVal(e.target.value);
+        setSearchVal(e.target.value.trimStart());
     }
 
     useEffect(() => {

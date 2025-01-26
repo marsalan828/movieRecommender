@@ -2,20 +2,19 @@ import './App.css'
 import Navbar from './components/Navbar';
 import Home from './pages/Home'
 import Favorities from './pages/Favorites';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { MovieProvider } from './contexts/MovieContext';
 
 function App() {
 
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/favourites" element={<Favorities />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <MovieProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/favourites" element={<Favorities />}></Route>
+      </Routes>
+    </MovieProvider>
   );
 }
 
